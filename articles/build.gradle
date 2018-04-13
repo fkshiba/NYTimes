@@ -1,0 +1,45 @@
+apply plugin: 'com.android.feature'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':base')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    // recyclerview
+    api 'com.android.support:recyclerview-v7:27.1.1'
+    // architecture components
+    api 'android.arch.lifecycle:viewmodel:1.1.1'
+    api 'android.arch.paging:runtime:1.0.0-beta1'
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    // rxjava
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
+    // new picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+}
