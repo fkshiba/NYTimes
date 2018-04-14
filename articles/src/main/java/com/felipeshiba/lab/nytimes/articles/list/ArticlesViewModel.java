@@ -20,8 +20,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ArticlesViewModel extends BaseViewModel {
 
-    private static final String TAG = ArticlesViewModel.class.getSimpleName();
-
     private ArticleRepository repository = new ArticleRepository(getApplication());
     private BehaviorRelay<List<Article>> articlesRelay =
             BehaviorRelay.createDefault(Collections.emptyList());
@@ -45,9 +43,5 @@ public class ArticlesViewModel extends BaseViewModel {
     private Function<ArticleResponseModel, Article> responseToArticle() {
         return response -> new Article(response.getTitle(), response.getPubDate(),
                 response.getSummary(), response.getPicture());
-    }
-
-    public void actionTopArticles() {
-        repository.fetchTopArticles();
     }
 }
