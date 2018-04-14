@@ -49,12 +49,6 @@ public class SearchArticlesAdapter extends RecyclerView.Adapter<SearchArticlesAd
         notifyItemRangeInserted(itemCount, articles.size());
     }
 
-    public void clear() {
-        int itemCount = getItemCount();
-        articles.clear();
-        notifyItemRangeRemoved(0, itemCount);
-    }
-
     public void setArticles(List<Article> articles) {
         this.articles = articles;
         notifyDataSetChanged();

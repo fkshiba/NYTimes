@@ -77,7 +77,13 @@ public class SearchActivity extends AppCompatActivity {
         Disposable queryDisposable = viewModel
                 .searchArticles()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(adapter::setArticles);
+                .subscribe(articles -> {
+                    if (page > 0) {
+                        adapter.addArticles(articles);
+                    } else {
+                        adapter.setArticles(articles);
+                    }
+                });
         disposeBag.add(queryDisposable);
 
         super.onStart();

@@ -29,7 +29,7 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
                 mPreviousTotal = totalItemCount;
             }
         }
-        int visibleThreshold = 5;
+        int visibleThreshold = 3;
         if (!mLoading && (totalItemCount - visibleItemCount)
                 <= (firstVisibleItem + visibleThreshold)) {
             // End has been reached
