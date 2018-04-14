@@ -35,7 +35,7 @@ public class ArticlesViewModel extends BaseViewModel {
                 .map(responseToArticle())
                 .toList()
                 .subscribe(articlesRelay);
-        disposableBag.add(disposable);
+        disposeBag.add(disposable);
     }
 
     public Flowable<List<Article>> fetchTopArticles() {

@@ -7,13 +7,13 @@ import android.support.annotation.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 
 public class BaseViewModel extends AndroidViewModel {
-    protected CompositeDisposable disposableBag = new CompositeDisposable();
+    protected CompositeDisposable disposeBag = new CompositeDisposable();
 
     public BaseViewModel(@NonNull Application application) {
         super(application);
     }
 
     public void disposeAll() {
-        disposableBag.clear();
+        disposeBag.clear();
     }
 }

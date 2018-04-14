@@ -3,9 +3,9 @@ package com.felipeshiba.lab.nytimes.articles.data.articles.model.search;
 import java.util.List;
 
 public class SearchDocsResponseModel {
-    private List<SearchArticlesResponseModel> searchArticles;
+    private List<SearchArticlesResponseModel> docs;
 
-    public List<SearchArticlesResponseModel> getSearchArticles() {
-        return searchArticles;
+    public List<SearchArticlesResponseModel> getDocs() {
+        return docs;
     }
 }

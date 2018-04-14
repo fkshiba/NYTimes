@@ -41,6 +41,6 @@ public class ArticleRepository extends BaseRepository<ArticleRepository.ArticleS
 
     public Flowable<List<SearchArticlesResponseModel>> searchArticles(String query, int page) {
         return get().searchArticles(query, page)
-                .map(searchResults -> searchResults.getResponse().getSearchArticles());
+                .map(searchResults -> searchResults.getResponse().getDocs());
     }
 }

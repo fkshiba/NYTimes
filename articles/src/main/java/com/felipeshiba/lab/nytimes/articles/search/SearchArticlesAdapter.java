@@ -1,4 +1,4 @@
-package com.felipeshiba.lab.nytimes.articles.list;
+package com.felipeshiba.lab.nytimes.articles.search;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,20 +9,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.felipeshiba.lab.nytimes.articles.R;
+import com.felipeshiba.lab.nytimes.articles.list.Article;
 import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
 import java.util.List;
 
-public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.ArticleViewHolder> {
+public class SearchArticlesAdapter extends RecyclerView.Adapter<SearchArticlesAdapter.ArticleViewHolder> {
 
     private List<Article> articles = Collections.emptyList();
 
     @NonNull
     @Override
     public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater
-                .from(parent.getContext()).inflate(R.layout.row_article, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.row_article, parent, false);
         return new ArticleViewHolder(view);
     }
 
@@ -40,6 +41,18 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
     @Override
     public int getItemCount() {
         return articles.size();
+    }
+
+    public void addArticles(List<Article> articles) {
+        int itemCount = getItemCount();
+        this.articles.addAll(articles);
+        notifyItemRangeInserted(itemCount, articles.size());
+    }
+
+    public void clear() {
+        int itemCount = getItemCount();
+        articles.clear();
+        notifyItemRangeRemoved(0, itemCount);
     }
 
     public void setArticles(List<Article> articles) {
