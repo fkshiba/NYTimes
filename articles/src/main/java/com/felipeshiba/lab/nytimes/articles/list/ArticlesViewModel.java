@@ -4,8 +4,8 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 
 import com.felipeshiba.lab.nytimes.articles.BaseViewModel;
-import com.felipeshiba.lab.nytimes.articles.data.articles.ArticleRepository;
-import com.felipeshiba.lab.nytimes.articles.data.articles.model.list.ArticleResponseModel;
+import com.felipeshiba.lab.nytimes.articles.data.list.TopArticlesRepository;
+import com.felipeshiba.lab.nytimes.articles.data.list.ArticleResponseModel;
 import com.jakewharton.rxrelay2.BehaviorRelay;
 
 import java.util.Collections;
@@ -20,12 +20,15 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ArticlesViewModel extends BaseViewModel {
 
-    private ArticleRepository repository = new ArticleRepository(getApplication());
+    private TopArticlesRepository repository = new TopArticlesRepository(getApplication());
     private BehaviorRelay<List<Article>> articlesRelay =
             BehaviorRelay.createDefault(Collections.emptyList());
 
     public ArticlesViewModel(@NonNull Application application) {
         super(application);
+    }
+
+    public void fetchTopArticles() {
         Disposable disposable = repository.fetchTopArticles()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -36,7 +39,8 @@ public class ArticlesViewModel extends BaseViewModel {
         disposeBag.add(disposable);
     }
 
-    public Flowable<List<Article>> fetchTopArticles() {
+
+    public Flowable<List<Article>> getTopArticles() {
         return articlesRelay.toFlowable(BackpressureStrategy.DROP);
     }
 

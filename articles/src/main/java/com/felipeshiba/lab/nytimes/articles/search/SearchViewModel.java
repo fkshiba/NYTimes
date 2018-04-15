@@ -6,8 +6,9 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.felipeshiba.lab.nytimes.articles.BaseViewModel;
-import com.felipeshiba.lab.nytimes.articles.data.articles.ArticleRepository;
-import com.felipeshiba.lab.nytimes.articles.data.articles.model.search.SearchArticlesResponseModel;
+import com.felipeshiba.lab.nytimes.articles.data.list.TopArticlesRepository;
+import com.felipeshiba.lab.nytimes.articles.data.search.SearchArticlesRepository;
+import com.felipeshiba.lab.nytimes.articles.data.search.SearchArticlesResponseModel;
 import com.felipeshiba.lab.nytimes.articles.list.Article;
 import com.jakewharton.rxrelay2.BehaviorRelay;
 
@@ -17,12 +18,9 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
-import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 public class SearchViewModel extends BaseViewModel {
 
@@ -30,7 +28,7 @@ public class SearchViewModel extends BaseViewModel {
 
     private BehaviorRelay<String> query = BehaviorRelay.createDefault("");
     private BehaviorRelay<Integer> page = BehaviorRelay.createDefault(0);
-    private ArticleRepository repository = new ArticleRepository(getApplication());
+    private SearchArticlesRepository repository = new SearchArticlesRepository(getApplication());
     private BehaviorRelay<List<Article>> articlesSubject = BehaviorRelay
             .createDefault(Collections.emptyList());
 

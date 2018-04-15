@@ -42,8 +42,9 @@ public class ArticlesActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        viewModel.fetchTopArticles();
         Disposable disposable = viewModel
-                .fetchTopArticles()
+                .getTopArticles()
                 .subscribe(adapter::setArticles);
         disposeBag.add(disposable);
     }

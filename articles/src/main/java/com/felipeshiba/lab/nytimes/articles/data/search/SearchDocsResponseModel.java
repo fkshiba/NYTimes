@@ -1,4 +1,4 @@
-package com.felipeshiba.lab.nytimes.articles.data.articles.model.search;
+package com.felipeshiba.lab.nytimes.articles.data.search;
 
 import java.util.List;
 
