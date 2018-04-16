@@ -20,6 +20,13 @@ public class ArticleResponseModel {
     public ArticleResponseModel() {
     }
 
+    public ArticleResponseModel(String title, String pub_date, String summary, List<MultimediaResponseModel> picture) {
+        this.title = title;
+        this.pub_date = pub_date;
+        this.summary = summary;
+        this.picture = picture;
+    }
+
     public String getTitle() {
         return title;
     }

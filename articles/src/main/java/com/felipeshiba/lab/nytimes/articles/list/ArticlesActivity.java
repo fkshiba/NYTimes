@@ -11,6 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.felipeshiba.lab.nytimes.articles.R;
+import com.felipeshiba.lab.nytimes.articles.data.list.TopArticlesRepository;
+import com.felipeshiba.lab.nytimes.articles.data.search.SearchArticlesRepository;
 import com.felipeshiba.lab.nytimes.articles.search.SearchActivity;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -27,9 +29,7 @@ public class ArticlesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_articles);
 
-        ViewModelProvider.AndroidViewModelFactory viewModelFactory =
-                ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication());
-        viewModel = viewModelFactory.create(ArticlesViewModel.class);
+        viewModel = new ArticlesViewModel(new TopArticlesRepository(this));
 
         RecyclerView mainList = findViewById(R.id.list_main);
         adapter = new ArticleListAdapter();
@@ -42,10 +42,7 @@ public class ArticlesActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        viewModel.fetchTopArticles();
-        Disposable disposable = viewModel
-                .getTopArticles()
-                .subscribe(adapter::setArticles);
+        Disposable disposable = viewModel.fetchTopArticles().subscribe(adapter::setArticles);
         disposeBag.add(disposable);
     }
 

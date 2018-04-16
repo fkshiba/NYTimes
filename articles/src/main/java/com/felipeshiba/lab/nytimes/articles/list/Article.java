@@ -44,4 +44,9 @@ public class Article {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return this.title.equals(((Article) other).title);
+    }
 }

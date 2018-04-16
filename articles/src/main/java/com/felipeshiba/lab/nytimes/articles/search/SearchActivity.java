@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 
 import com.felipeshiba.lab.nytimes.articles.R;
+import com.felipeshiba.lab.nytimes.articles.data.search.SearchArticlesRepository;
 import com.felipeshiba.lab.nytimes.articles.view.EndlessScrollListener;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -34,9 +35,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void configureViewModel() {
-        ViewModelProvider.AndroidViewModelFactory viewModelFactory =
-                ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication());
-        viewModel = viewModelFactory.create(SearchViewModel.class);
+        viewModel = new SearchViewModel(new SearchArticlesRepository(this));
     }
 
     private void configureFieldSearch() {
@@ -75,8 +74,7 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         Disposable queryDisposable = viewModel
-                .searchArticles()
-                .observeOn(AndroidSchedulers.mainThread())
+                .fetchArticles()
                 .subscribe(articles -> {
                     if (page > 0) {
                         adapter.addArticles(articles);

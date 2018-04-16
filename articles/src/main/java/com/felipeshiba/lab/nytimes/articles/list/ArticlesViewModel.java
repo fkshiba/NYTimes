@@ -1,47 +1,32 @@
 package com.felipeshiba.lab.nytimes.articles.list;
 
-import android.app.Application;
-import android.support.annotation.NonNull;
-
 import com.felipeshiba.lab.nytimes.articles.BaseViewModel;
-import com.felipeshiba.lab.nytimes.articles.data.list.TopArticlesRepository;
 import com.felipeshiba.lab.nytimes.articles.data.list.ArticleResponseModel;
-import com.jakewharton.rxrelay2.BehaviorRelay;
+import com.felipeshiba.lab.nytimes.articles.data.list.TopArticlesRepository;
 
-import java.util.Collections;
 import java.util.List;
 
-import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class ArticlesViewModel extends BaseViewModel {
 
-    private TopArticlesRepository repository = new TopArticlesRepository(getApplication());
-    private BehaviorRelay<List<Article>> articlesRelay =
-            BehaviorRelay.createDefault(Collections.emptyList());
+    private TopArticlesRepository repository;
 
-    public ArticlesViewModel(@NonNull Application application) {
-        super(application);
+    public ArticlesViewModel(TopArticlesRepository repository) {
+        this.repository = repository;
     }
 
-    public void fetchTopArticles() {
-        Disposable disposable = repository.fetchTopArticles()
+    public Single<List<Article>> fetchTopArticles() {
+        return repository.fetchTopArticles()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap(Flowable::fromIterable)
                 .map(responseToArticle())
-                .toList()
-                .subscribe(articlesRelay);
-        disposeBag.add(disposable);
-    }
-
-
-    public Flowable<List<Article>> getTopArticles() {
-        return articlesRelay.toFlowable(BackpressureStrategy.DROP);
+                .toList();
     }
 
     private Function<ArticleResponseModel, Article> responseToArticle() {

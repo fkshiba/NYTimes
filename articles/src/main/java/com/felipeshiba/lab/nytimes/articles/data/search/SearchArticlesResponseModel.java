@@ -21,6 +21,16 @@ public class SearchArticlesResponseModel {
     @SerializedName("multimedia")
     private List<MultimediaResponseModel> picture;
 
+    public SearchArticlesResponseModel(HeadlineResponseModel title, String summary, String pubDate, List<MultimediaResponseModel> picture) {
+        this.title = title;
+        this.summary = summary;
+        this.pubDate = pubDate;
+        this.picture = picture;
+    }
+
+    public SearchArticlesResponseModel() {
+    }
+
     public String getTitle() {
         return title.getMain();
     }
