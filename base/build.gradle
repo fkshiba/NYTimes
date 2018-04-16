@@ -26,5 +26,4 @@ dependencies {
     api 'com.android.support.constraint:constraint-layout:1.0.2'
     application project(':app')
     feature project(':articles')
-    feature project(":search")
 }

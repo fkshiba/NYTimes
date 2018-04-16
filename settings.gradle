@@ -1,1 +1,1 @@
-include ':articles', ':app', ':base', ':instantapp', ':search'
+include ':articles', ':app', ':base'
