@@ -23,7 +23,7 @@ Na API de apresentação dos artigos mais populares não havia suporte a pagina�
 * Picasso
 * Mockito
 
-## O que poderia ser feito com mais tempo
+## TODO
 
 * Melhorias na UI da aplicação
 * Teste da camada de API
